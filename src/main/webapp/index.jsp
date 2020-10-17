@@ -36,5 +36,6 @@ supported now, Ansible solves configuration problem at a small
 scale.</p>
 <p> Adding new para </p>
 <p> Adding new code for Terraform </p>
+<p> Adding code for Docker </p>
 </body>
 </html>
