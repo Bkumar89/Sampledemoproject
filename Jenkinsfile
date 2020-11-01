@@ -10,11 +10,6 @@ pipeline
            
        }
    
-   parameters
-   {
-      choice(name: 'BRANCH_NAME', choices: ['develop', 'master'], description: 'Please select the branch for the build. By default, Build will happen for develop.')
-   }
-   
  stages
      {
           stage ('GIT CHECKOUT')
@@ -24,7 +19,7 @@ pipeline
                                  step([$class: 'WsCleanup'])
                                  
                                  echo "Clonning the code"
-                               checkout([$class: 'GitSCM', branches: [[name: '${BRANCH_NAME}']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/Bkumar89/Sampledemoproject.git']]])
+                               checkout([$class: 'GitSCM', branches: [[name: 'develop']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/Bkumar89/Sampledemoproject.git']]])
                              }
                      
                     }
