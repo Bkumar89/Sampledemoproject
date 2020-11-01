@@ -31,8 +31,15 @@ pipeline
                                       script
                                        {
                                             def mavenhome=tool 'Maven3.6.0'
-                                            def Java=tool 'Java1.8'
+                                            //def Java=tool 'Java1.8'
                                             sh "mvn -f ${WORKSPACE}/pom.xml clean install"
+                                            sh """
+                                               mkdir -p ${WORKSPACE}/target/Sampledemoprojectartifacts
+                                               mv ${WORKSPACE}/target/Sampledemoproject.war ${WORKSPACE}/target/Sampledemoprojectartifacts
+                                               cd ${WORKSPACE}/target/
+                                               zip -r Sampledemoprojectartifacts-${BUILD_NUMBER}.zip Sampledemoprojectartifacts
+                                            """
+                                            archiveArtifacts allowEmptyArchive: true, artifacts: 'target/*.zip', followSymlinks: false, onlyIfSuccessful: true                                          
                                         }
                                         
                                    }
