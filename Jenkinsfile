@@ -9,6 +9,12 @@ pipeline
            maven 'Maven3.6.0'
            
        }
+   
+   parameters
+   {
+      choice(name: 'BRANCH_NAME', choices: ['develop', 'master'], description: 'Please select the branch for the build. By default, Build will happen for develop.')
+   }
+   
  stages
      {
           stage ('GIT CHECKOUT')
