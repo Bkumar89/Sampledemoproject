@@ -7,6 +7,7 @@ pipeline
     tools
        {
            maven 'Maven3.6.0'
+          jdk 'Java1.8'
            
        }
  stages
@@ -43,8 +44,18 @@ pipeline
                    {
                        steps
                             {
-                                 echo "Run The Sonar Scan"
-                             }
+                              script
+                              {
+                                 def scannerHome = tool 'Sonar_Scanner_4.2'
+	                              echo "${scannerHome}"
+                                 def javaHome = tool 'Java1.8'
+                                 withSonarQubeEnv('sonarserver')
+                                 {
+                                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.host.url=http://100.25.28.139:9000 -Dsonar.projectKey=Sampledemoproject -Dsonar.projectName=Sampledemoproject -Dsonar.projectVersion=1.0 -Dsonar.sources=src"
+
+                                 }
+                              }
+                            }
                      
                     }
       }
